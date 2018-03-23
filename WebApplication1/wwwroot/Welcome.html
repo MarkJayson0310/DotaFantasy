@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div style="max-width: 70%; margin:auto">
+        <table>
+            <tr>
+                <td colspan="2" width="100%">
+                    <table>
+                        <tr colspan="5">
+                            <td>
+                                Banner here...
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Sign in:
+                                        </td>
+                                        <td>
+                                            <input type="text" placeholder="enter user name" />
+                                        </td>
+                                        <td>
+                                            <input type="text" placeholder="enter password" />
+                                        </td>
+                                        <td>
+                                            <input type="button" value="GO" />
+                                        </td>
+                                        <td>
+                                            New user?
+                                        </td>
+                                        <td>
+                                            <a href="signup.html">Click here</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table style="border: solid; list-style-type: none; width:70%; padding: 2px" data-bind="foreach: matches">
+                        <tr>
+                            <td colspan="2">
+                                Total Points:
+                            </td>
+                            <td>
+                                50
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Total point available for this tournament :
+                            </td>
+                            <td>
+                                50
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-bind="text: MatchDate"></td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr style="text-align: left">
+                                                    <td data-bind="text: TeamOne"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" name="betTNC" data-bind="value: TeamOneBet" placeholder="place bet points here..." />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table>
+                                                <tr style="text-align:center">
+                                                    <td>
+                                                        vs
+                                                    </td>
+                                                </tr>
+                                                <tr style="text-align:center">
+                                                    <td>
+                                                        :
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table>
+                                                <tr style="text-align:right">
+                                                    <td data-bind="text: TeamTwo"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" name="betTNC" placeholder="place bet points here..." data-bind="value: TeamTwoBet" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="button" value="Lock in bet" data-bind="click: ( $data.TeamOneBet > 0 && $data.TeamTwoBet > 0 ) ? alert('Please choose 1 side to bet only') : $parent.SaveMatchBet.bind($data)" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                
+            </tr>
+        </table>
+
+
+
+    </div>
+    <script type="text/javascript" src="js/lib/knockout-3.4.2.js"></script>
+    <script type="text/javascript" src="js/lib/knockout-mapping.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+
+
+        var userinfo;
+        userinfo.details = ko.observableArray("");
+        userinfo.userID = 1;
+        userinfo.TotalPoints = 50;
+        userinfo.TotalPointsPerTournament = 50;
+
+        
+        //////load tournaments list
+        //var availableTournaments = [];
+        //$.get('http://localhost:51322/api/tournaments',
+        //    function (data) {
+        //        $.each(data, function (index, value) {
+        //            availableTournaments.push(value);
+        //        });
+        //        ko.applyBindings(availableTournaments);
+        //    }).fail(function () {
+        //        console.log('error');
+        //    });
+        ////end load
+
+        ///
+        var availableMatches = [];
+        $.post('http://localhost:51322/api/match/tournament/1', { UserID: "1", UserName: "Bettor 1" },
+            function (data) {
+                $.each(data, function (index, value) {
+                    availableMatches.push(value);
+                });
+                function BuildTable() {
+
+                    var self = this;
+                    self.matches = ko.observableArray(availableMatches);
+                    self.SaveMatchBet = function (body) {
+                        console.log(body);
+
+                        if (body.TeamOneBet > 0) {
+                            body.PlaceBet = body.TeamOneBet;
+                            body.TeamID = body.TeamOneID
+                        }
+                        else {
+                            body.PlaceBet = body.TeamTwoBet;
+                            body.TeamID = body.TeamTwoID
+                        }
+
+                        $.ajax({
+                            url: 'http://localhost:51322/api/add/bet',
+                            type: 'POST',
+                            data: body
+                        });
+                        
+                    }
+                }
+                ko.applyBindings(new BuildTable());
+
+            }).fail(function () {
+                console.log("error");
+            });
+        ///
+
+    </script>
+
+</body>
+</html>

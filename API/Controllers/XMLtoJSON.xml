@@ -1,0 +1,91 @@
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0">
+<channel>
+<title>Events</title>
+<link>https://www.morganlewis.com/</link>
+<description>Events RSS Feed</description>
+<count>5</count>
+<item>
+<link>
+https://www.morganlewis.com/events/california-payroll-conference-2018
+</link>
+<title>California Payroll Conference 2018</title>
+<description>Kathryn T. McGuigan, presenter</description>
+<pubDate>Wed, 24 Oct 2018 04:00:00 Z</pubDate>
+<guid>{5E9D3B4F-564B-4915-8579-BF6186C13B4A}</guid>
+<practice>eb</practice>
+<practice>lbr</practice>
+<author>Kathryn T. McGuigan</author>
+</item>
+<item>
+<link>
+https://www.morganlewis.com/events/the-accounting-and-finance-show-la
+</link>
+<title>The Accounting and Finance Show LA</title>
+<description>
+Labor and Employment of counsel Kate McGuigan will speak about payroll and related topics at The Accounting Finance Show LA, a conference and exhibition for accountants, bookkeepers, and finance managers that showcases new technologies, skills, and ideas and promotes networking and collaboration in the industry.
+</description>
+<pubDate>Wed, 25 Jul 2018 04:00:00 Z</pubDate>
+<guid>{FEBD4800-740B-4925-99C5-10A9DDED5627}</guid>
+<practice>eb</practice>
+<practice>lbr</practice>
+<author>Kathryn T. McGuigan</author>
+</item>
+<item>
+<link>
+https://www.morganlewis.com/events/boston-2018-morgan-lewis-advanced-topics-in-hedge-fund-practices-conference
+</link>
+<title>
+2018 Morgan Lewis Advanced Topics in Hedge Fund Practices Conference: Manager and Investor Perspectives – Boston
+</title>
+<description>
+Save the date for the annual Advanced Topics in Hedge Fund Practices Conference: Manager and Investor Perspectives in Boston.
+</description>
+<pubDate>Thu, 14 Jun 2018 04:00:00 Z</pubDate>
+<guid>{A4F44799-93C1-436B-ACFD-D1F53BCC25FF}</guid>
+<practice>impg</practice>
+<practice>pif</practice>
+<practice>cbt</practice>
+<practice>fin</practice>
+<author>Steven M. Giordano</author>
+<author>Richard A. Goldman</author>
+<author>Stephen C. Tirrell</author>
+</item>
+<item>
+<link>
+https://www.morganlewis.com/events/2018-morgan-lewis-advanced-topics-in-hedge-fund-practices-conference
+</link>
+<title>
+2018 Morgan Lewis Advanced Topics in Hedge Fund Practices Conference: Manager and Investor Perspectives
+</title>
+<description>
+Save the date for the 11th annual 11th Annual Advanced Topics in Hedge Fund Practices Conference: Manager and Investor Perspectives.
+</description>
+<pubDate>Tue, 12 Jun 2018 04:00:00 Z</pubDate>
+<guid>{9FE37A6C-187B-4530-8BC6-B413DFB13895}</guid>
+<practice>impg</practice>
+<practice>pif</practice>
+<practice>cbt</practice>
+<practice>fin</practice>
+<author>Jedd H. Wider</author>
+<author>Timothy W. Levin</author>
+</item>
+<item>
+<link>
+https://www.morganlewis.com/events/emerging-and-key-issues-in-energy-storage-development-changes-to-organized-markets
+</link>
+<title>
+Emerging and Key Issues in Energy Storage Development: Changes to Organized Markets
+</title>
+<description>
+Please join us for a three-part webinar series addressing emerging and key issues in energy storage development.
+</description>
+<pubDate>Thu, 31 May 2018 17:00:00 Z</pubDate>
+<guid>{3D6C5160-FA51-4BD6-A74D-E37E78A45FDF}</guid>
+<practice>ene</practice>
+<practice>enet</practice>
+<author>Stephen M. Spina</author>
+<author>Levi McAllister</author>
+<author>Arjun Prasad Ramadevanahalli</author>
+</item>
+</channel>
+</rss>
