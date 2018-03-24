@@ -11,6 +11,7 @@ namespace DataModel
         public int BettorID { get; set; }
         public int MatchID { get; set; }
         public int TeamID { get; set; }
+        public int TournamentID { get; set; }
         public int PlaceBet { get; set; }
     }
 }

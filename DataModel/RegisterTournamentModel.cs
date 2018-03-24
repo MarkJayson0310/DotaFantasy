@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    public class UserPointsModel
+    public class TournamentRegistrationModel
     {
         public int UserID { get; set; }
-        public int TotalPoints { get; set; }
-        public int AvailableMatchPoints { get; set; }
-        public int MatchID { get; set; }
+        public int TournamentID { get; set; }
+        public int TournamentPoints { get; set; }
     }
 }

@@ -76,19 +76,14 @@ namespace API.Controllers
             return _repo.GetAvailableTournament();
         }
 
-        [EnableCors(origins: "http://localhost:55869", headers: "*", methods: "*")]
+        [EnableCors(origins: "http://localhost:64057", headers: "*", methods: "*")]
         [HttpPost]
-        [Route("api/xml")]
-        public dynamic ReturnJSON([FromBody]string xml)
+        [Route("api/registerbet")]
+        public dynamic ReturnJSON(TournamentRegistrationModel tournamentregister)
         {
-            XmlDocument doc = new XmlDocument();
-            //doc.Load(@"C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\Controllers\XMLtoJSON.xml");
-            doc.LoadXml(xml);
-            var json = JsonConvert.SerializeXmlNode(doc, Newtonsoft.Json.Formatting.None, true);
+            TeamRepository _repo = new TeamRepository();
 
-            var transactObject1 = JsonConvert.DeserializeObject(json);
-
-            return null;
+            return _repo.RegisterTournamentBet(tournamentregister);
         }
     }
 }

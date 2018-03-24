@@ -40,13 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RegisterTournamentModel.cs" />
     <Compile Include="TeamModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TournamentModel.cs" />
     <Compile Include="UserBetModel.cs" />
     <Compile Include="UserLoginModel.cs" />
     <Compile Include="UserModel.cs" />
-    <Compile Include="UserPointsModel.cs" />
+    <Compile Include="TournamentRegistrationModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

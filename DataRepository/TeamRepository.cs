@@ -74,7 +74,7 @@ namespace DataRepository
             oMySQLData.MySqlConnection oCon = new oMySQLData.MySqlConnection("Server=localhost;Database=betting;Uid=root;Pwd=Mysqlm@rch101984;");
             oCon.Open();
 
-            string fetchQuery = "SELECT * FROM view_userdetails WHERE fldUserID = " + userID;
+            string fetchQuery = "SELECT * FROM view_userdetails WHERE UserID = " + userID;
 
             List<UserPointsModel> userbets = new List<UserPointsModel>();
 
@@ -86,10 +86,10 @@ namespace DataRepository
             while(reader.Read())
             {
                 UserPointsModel userbet = new UserPointsModel();
-                userbet.UserID = Convert.ToInt32(reader["fldUserID"]);
-                userbet.MatchID = Convert.ToInt32(reader["fldMatchID"]);
-                userbet.TotalPoints = Convert.ToInt32(reader["fldTotalBetPoints"]);
-                userbet.AvailableMatchPoints = Convert.ToInt32(reader["fldavailablematchpoints"]);
+                userbet.UserID = Convert.ToInt32(reader["UserID"]);
+                userbet.TournamentID = Convert.ToInt32(reader["TournamentID"]);
+                userbet.TotalPoints = Convert.ToInt32(reader["TotalBetPoints"]);
+                userbet.TournamentPoints = Convert.ToInt32(reader["TournamentPoints"]);
 
                 userbets.Add(userbet);
             }
@@ -139,11 +139,13 @@ namespace DataRepository
             oMySQLData.MySqlParameter matchID = new oMySQLData.MySqlParameter("matchID", userbet.MatchID);
             oMySQLData.MySqlParameter bettorID = new oMySQLData.MySqlParameter("bettorID", userbet.BettorID);
             oMySQLData.MySqlParameter betTeamID = new oMySQLData.MySqlParameter("betTeamID", userbet.TeamID);
+            oMySQLData.MySqlParameter tournamentID = new oMySQLData.MySqlParameter("tournamentID", userbet.TournamentID);
             oMySQLData.MySqlParameter placeBetPoints = new oMySQLData.MySqlParameter("placeBetPoints", userbet.PlaceBet);
 
             cmd.Parameters.Add(matchID);
             cmd.Parameters.Add(bettorID);
             cmd.Parameters.Add(betTeamID);
+            cmd.Parameters.Add(tournamentID);
             cmd.Parameters.Add(placeBetPoints);
 
             int result = 0;
@@ -178,6 +180,29 @@ namespace DataRepository
             }
             oCon.Close();
             return tournaments;
+        }
+
+        public int RegisterTournamentBet(TournamentRegistrationModel register)
+        {
+            oMySQLData.MySqlConnection oCon = new oMySQLData.MySqlConnection("Server=localhost;Database=betting;Uid=root;Pwd=Mysqlm@rch101984;");
+            oCon.Open();
+
+            oMySQLData.MySqlCommand cmd = new oMySQLData.MySqlCommand("sp_registerusertournamentbet", oCon);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            oMySQLData.MySqlParameter userID = new oMySQLData.MySqlParameter("userID", register.UserID);
+            oMySQLData.MySqlParameter tournamentID = new oMySQLData.MySqlParameter("tournamentID", register.TournamentID);
+            oMySQLData.MySqlParameter betPoints = new oMySQLData.MySqlParameter("betPoints", register.TournamentPoints);
+     
+            cmd.Parameters.Add(userID);
+            cmd.Parameters.Add(tournamentID);
+            cmd.Parameters.Add(betPoints);
+
+            int result = 0;
+            result = cmd.ExecuteNonQuery();
+            oCon.Close();
+
+            return result;
         }
 
     }
