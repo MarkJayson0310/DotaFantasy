@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="matchlist.aspx.cs" Inherits="UI.matchlist" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="max-width: 70%; margin: auto">
         <table>
@@ -62,7 +61,7 @@
                                                         <input type="text" name="betTNC" placeholder="place bet points here..." data-bind="value: TeamTwoBet" />
                                                     </td>
                                                     <td>
-                                                        <input type="button" value="Lock in bet" data-bind="click: $parent.SaveMatchBet.bind($data)" />
+                                                        <input type="button" value="Lock in bet" class="btn place-bet" data-bind="click: $parent.SaveMatchBet.bind($data)" />
                                                     </td>
                                                 </tr>
                                             </table>
@@ -77,11 +76,11 @@
 
     <script type="text/javascript">
 
-        var currentEmail = localStorage['currentEmail'] || 'N/A';
-        var currentUserID = localStorage['currentUserID'] || 'N/A';
+        var currentEmail = sessionStorage['_currentEmail'] || 'N/A';
+        var currentUserID = sessionStorage['_currentID'] || 0;
         //console.log(currentEmail + '-' + currentUserID);
 
-        var currentTournamentID = 1;
+        var currentTournamentID = sessionStorage['_currentTournamentID'] || 0;
 
         var userPointsDetails = [];
         var totalpoints = 0;
@@ -91,7 +90,7 @@
         var _self = this;
         _self.UserPointsDetails = ko.observableArray([]);
 
-        $.get('http://localhost:51322/api/betpoints/user/' + currentUserID,
+        $.get(apiDomain + 'api/betpoints/user/' + currentUserID,
             function (data) {
                 $.each(data, function (index, value) {
                     userPointsDetails.push(value);
@@ -101,10 +100,6 @@
                     totalpoints = userPointsDetails[0].TotalPoints;
                     tournamentpoints = userPointsDetails[0].TournamentPoints;
                 }
-
-                //$('#totalPoints').html(totalpoints);
-                //$('#tournamentPoints').html(tournamentpoints);
-
             }).fail(function () {
                 console.log('error');
             });
@@ -112,7 +107,7 @@
 
         ///
         var availableMatches = [];
-        $.post('http://localhost:51322/api/match/tournament/' + currentTournamentID, { UserID: currentUserID, UserName: "Bettor 1" },
+        $.post(apiDomain + 'api/match/tournament/' + currentTournamentID, { UserID: currentUserID, UserName: "Bettor 1" },
             function (data) {
                 $.each(data, function (index, value) {
                     availableMatches.push(value);
@@ -160,11 +155,11 @@
                         }
 
                         $.ajax({
-                            url: 'http://localhost:51322/api/add/bet',
+                            url: apiDomain + 'api/add/bet',
                             type: 'POST',
                             data: body,
                             success: function (data) {
-                                window.location.href = "http://localhost:64057/matchlist.aspx";
+                                window.location.href = "matchlist.aspx";
                             }
                         });
                     }
@@ -176,7 +171,7 @@
                             return;
                         }
 
-                        $.post('http://localhost:51322/api/registerbet', { userID: currentUserID, tournamentID: currentTournamentID, TournamentPoints: 50 })
+                        $.post(apiDomain + 'api/registerbet', { userID: currentUserID, tournamentID: currentTournamentID, TournamentPoints: 50 })
                             .done(function () {
                                 alert('Your ready to bet for this tournament!');
                             })

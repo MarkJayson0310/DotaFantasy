@@ -65,11 +65,19 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="activateuser.aspx" />
     <Content Include="AddUser.aspx" />
+    <Content Include="main.aspx" />
     <Content Include="login.aspx" />
     <Content Include="packages.config" />
-    <Content Include="Scripts\js\global.js" />
+    <Content Include="Scripts\css\bootstrap-3.3.7.css" />
+    <Content Include="Scripts\css\Style.css" />
+    <Content Include="Scripts\js\bootstrap-3.3.7.min.js" />
+    <Content Include="Scripts\js\global-config.js" />
+    <Content Include="Scripts\js\login.js" />
     <Content Include="Site1.Master" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -86,12 +94,26 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="activateuser.aspx.cs">
+      <DependentUpon>activateuser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="activateuser.aspx.designer.cs">
+      <DependentUpon>activateuser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddUser.aspx.cs">
       <DependentUpon>AddUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AddUser.aspx.designer.cs">
       <DependentUpon>AddUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="main.aspx.cs">
+      <DependentUpon>main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="main.aspx.designer.cs">
+      <DependentUpon>main.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -122,7 +144,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\css\" />
+    <Folder Include="Scripts\css\images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -16,6 +16,6 @@ namespace DataModel
         public string Password { get; set; }
         public bool IsVerified { get; set; }
         public bool IsActive { get; set; }
-
+        public bool IsUserExist { get; set; }
     }
 }

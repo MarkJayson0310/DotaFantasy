@@ -1,0 +1,5 @@
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataModel\bin\Release\DataModel.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataModel\bin\Release\DataModel.pdb
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataModel\obj\Release\DataModel.csprojResolveAssemblyReference.cache
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataModel\obj\Release\DataModel.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataModel\obj\Release\DataModel.pdb

@@ -1,0 +1,10 @@
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Release\DataRepository.dll.config
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Release\DataRepository.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Release\DataRepository.pdb
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Release\DataModel.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Release\MySql.Data.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Release\DataModel.pdb
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Release\MySql.Data.xml
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\obj\Release\DataRepository.csprojResolveAssemblyReference.cache
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\obj\Release\DataRepository.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\obj\Release\DataRepository.pdb

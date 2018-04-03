@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="AddUser.aspx.cs" Inherits="UI.AddUser" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="max-width: 50%; margin: auto">
         <table data-bind="with: viewModel">
@@ -58,9 +56,6 @@
         </table>
     </div>
 
-    <script type="text/javascript" src="Scripts/js/knockout-3.4.2.js"></script>
-    <script type="text/javascript" src="Scripts/js/knockout-mapping.js"></script>
-    <script type="text/javascript" src="Scripts/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
         
         function BuildUserInput() {
@@ -76,11 +71,20 @@
             };
             self.AddUser = function (body) {
                     $.ajax({
-                        url: 'http://localhost:51322/api/user/add',
-                        type: 'post',
-                        data: self.viewModel
+                        url: apiDomain + 'api/user/add',
+                        type: 'POST',
+                        data: self.viewModel,
+                        success: function (data) {
+
+                            if (data.IsUserExist) {
+                                alert('Email ID already registered!');
+                                return;
+                            }
+
+                            localStorage["currentEmail"] = data.EmailAddress;
+                            window.location.href = "activateuser.aspx";
+                        }
                     });
-                    console.log(self.viewModel);
                 }
         }
         ko.applyBindings(new BuildUserInput());

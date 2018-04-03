@@ -5,26 +5,39 @@
 <html>
 <head runat="server">
     <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
 
     <script type="text/javascript" src="Scripts/js/knockout-3.4.2.js"></script>
     <script type="text/javascript" src="Scripts/js/knockout-mapping.js"></script>
     <script type="text/javascript" src="Scripts/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="Scripts/js/global.js"></script>
+    <script type="text/javascript" src="Scripts/js/bootstrap-3.3.7.min.js"></script>
+    <script type="text/javascript" src="Scripts/js/global-config.js"></script>
+    <link href="Scripts/css/bootstrap-3.3.7.css" rel="stylesheet" type="text/css" />
+    <link href="Scripts/css/Style.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript">
+        var apiDomain = GlobalConfig.apiDomain();
+    </script>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div style="max-width: 30%; margin: auto">
-            <a href="matchlist.aspx">Match list</a>
-            <a href="login.aspx">Log in</a>
-            <a href="AddUser.aspx">Add User</a>
-            
+
+    <div id="wrapper">
+        <div id="header" class="container">
+            <div id="logo">
+                <h1><a href="main.aspx">Dota Bet</a></h1>
+            </div>
+            <div id="menu">
+                <ul>
+                    <li class="current_page_item"><a href="main.aspx">Tournaments</a></li>
+                    <li></li>
+                    <li><a href="AddUser.aspx" id="liRegister">Register</a></li>
+                </ul>
+            </div>
         </div>
-        <div>
+        <div id="page">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-    </form>
+    </div>
+
 </body>
 </html>

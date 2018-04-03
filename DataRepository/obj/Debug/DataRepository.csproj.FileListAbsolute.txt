@@ -8,3 +8,11 @@ C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Debug\M
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\obj\Debug\DataRepository.csprojResolveAssemblyReference.cache
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\obj\Debug\DataRepository.dll
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\obj\Debug\DataRepository.pdb
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Debug\Common.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Debug\Common.pdb
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Debug\EntityFramework.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Debug\MySql.Data.Entity.EF6.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Debug\EntityFramework.xml
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\DataRepository\bin\Debug\MySql.Data.Entity.EF6.xml

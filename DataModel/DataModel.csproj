@@ -40,9 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivateUserModel.cs" />
+    <Compile Include="MatchModel.cs" />
     <Compile Include="RegisterTournamentModel.cs" />
-    <Compile Include="TeamModel.cs" />
+    <Compile Include="MatchBetModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TournamentMatchModel.cs" />
     <Compile Include="TournamentModel.cs" />
     <Compile Include="UserBetModel.cs" />
     <Compile Include="UserLoginModel.cs" />

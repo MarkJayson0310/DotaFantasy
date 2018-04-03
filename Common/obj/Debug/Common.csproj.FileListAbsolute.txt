@@ -1,0 +1,5 @@
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\Common\bin\Debug\Common.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\Common\bin\Debug\Common.pdb
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\Common\obj\Debug\Common.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\Common\obj\Debug\Common.pdb

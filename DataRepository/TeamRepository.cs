@@ -5,14 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using oMySQLData = MySql.Data.MySqlClient;
 using DataModel;
+using Common;
 
 namespace DataRepository
 {
     public class TeamRepository
     {
+        private static Random random = new Random();
 
-        public int AddNewUser(UserModel newuser)
+        public dynamic AddNewUser(UserModel newuser)
         {
+
+            if (IsRegisterEmailAddExists(newuser.EmailAddress) >= 1)
+            {
+                newuser.IsUserExist = true;
+                return newuser;
+            }
+
             oMySQLData.MySqlConnection oCon = new oMySQLData.MySqlConnection("Server=localhost;Database=betting;Uid=root;Pwd=Mysqlm@rch101984;");
             oCon.Open();
 
@@ -25,21 +34,35 @@ namespace DataRepository
             oMySQLData.MySqlParameter lastName = new oMySQLData.MySqlParameter("lastName", newuser.LastName);
             oMySQLData.MySqlParameter pswd = new oMySQLData.MySqlParameter("pswd", newuser.Password);
 
+            string code = RandomString(6);
+
+            oMySQLData.MySqlParameter activationCode = new oMySQLData.MySqlParameter("activationCode", code);
+
             cmd.Parameters.Add(userEmail);
             cmd.Parameters.Add(firstName);
             cmd.Parameters.Add(middleName);
             cmd.Parameters.Add(lastName);
             cmd.Parameters.Add(pswd);
+            cmd.Parameters.Add(activationCode);
 
             int result = 0;
             result = cmd.ExecuteNonQuery();
 
+            if (result > 0)
+            {
+
+                EmailNotification notif = new EmailNotification();
+                notif.NotifyNewUsserForActivation(newuser.EmailAddress, code);
+
+                return newuser;
+            }
+
             oCon.Close();
 
+           
             return result;
 
         }
-
 
         public dynamic LogInUser(UserModel loginuser)
         {
@@ -63,12 +86,43 @@ namespace DataRepository
                 user.UserID = Convert.ToInt32(reader["flduserid"]);
                 user.EmailAddress = reader["fldUserEmail"].ToString();
                 user.FirstName = reader["fldFirstName"].ToString();
+                user.IsVerified = Convert.ToBoolean(reader["fldIsVerified"]);
+                user.IsUserExist = true;
             }
 
             oCon.Close();
 
+            if (user == null)
+            {
+                user.EmailAddress = loginuser.EmailAddress;
+                user.IsUserExist = false;
+            }
+
             return user;
         }
+
+        public dynamic ValidateUserActivation(ActivateUserModel activate)
+        {
+            oMySQLData.MySqlConnection oCon = new oMySQLData.MySqlConnection("Server=localhost;Database=betting;Uid=root;Pwd=Mysqlm@rch101984;");
+            oCon.Open();
+
+            oMySQLData.MySqlCommand cmd = new oMySQLData.MySqlCommand("sp_activateuser", oCon);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            oMySQLData.MySqlParameter userEmail = new oMySQLData.MySqlParameter("userEmail", activate.UserEmail);
+            oMySQLData.MySqlParameter activationCode = new oMySQLData.MySqlParameter("activationCode", activate.ActivationCode);
+
+            cmd.Parameters.Add(userEmail);
+            cmd.Parameters.Add(activationCode);
+
+            int result = 0;
+            result = cmd.ExecuteNonQuery();
+
+            oCon.Close();
+
+            return result;
+        }
+
         public dynamic GetUserBetPointsDetails(int userID)
         {
             oMySQLData.MySqlConnection oCon = new oMySQLData.MySqlConnection("Server=localhost;Database=betting;Uid=root;Pwd=Mysqlm@rch101984;");
@@ -83,7 +137,7 @@ namespace DataRepository
 
             oMySQLData.MySqlDataReader reader = cmd.ExecuteReader();
 
-            while(reader.Read())
+            while (reader.Read())
             {
                 UserPointsModel userbet = new UserPointsModel();
                 userbet.UserID = Convert.ToInt32(reader["UserID"]);
@@ -97,6 +151,60 @@ namespace DataRepository
             return userbets;
         }
 
+        public dynamic GetInitialTournamentMatchList()
+        {
+            oMySQLData.MySqlConnection oCon = new oMySQLData.MySqlConnection("Server=localhost;Database=betting;Uid=root;Pwd=Mysqlm@rch101984;");
+            oCon.Open();
+
+            string fetchQuery = "SELECT * FROM tbltournaments WHERE fldisactive = 1 ORDER BY fldTournamentDate DESC";
+
+            List<TournamentMatchModel> tournamentmatches = new List<TournamentMatchModel>();
+
+            oMySQLData.MySqlCommand cmd = new oMySQLData.MySqlCommand(fetchQuery, oCon);
+            cmd.ExecuteNonQuery();
+
+            oMySQLData.MySqlDataReader reader = cmd.ExecuteReader();
+
+            string matchQuery;
+            while (reader.Read())
+            {
+                TournamentMatchModel tournamentmatch = new TournamentMatchModel();
+
+                tournamentmatch.TournamentID = Convert.ToInt32(reader["fldtournamentid"]);
+                tournamentmatch.TournamentName = (reader["fldTournamentName"]).ToString();
+
+                oMySQLData.MySqlConnection oConmatches = new oMySQLData.MySqlConnection("Server=localhost;Database=betting;Uid=root;Pwd=Mysqlm@rch101984;");
+                oConmatches.Open();
+
+                matchQuery = "SELECT * FROM view_matchlistdetails WHERE TournamentID = " + tournamentmatch.TournamentID + " ORDER BY fldmatchdate DESC LIMIT 3";
+
+                oMySQLData.MySqlCommand cmdmatches = new oMySQLData.MySqlCommand(matchQuery, oConmatches);
+                cmdmatches.ExecuteNonQuery();
+
+                oMySQLData.MySqlDataReader matchreader = cmdmatches.ExecuteReader();
+
+                List<MatchModel> matches = new List<MatchModel>();
+
+                while (matchreader.Read())
+                {
+                    MatchModel match = new MatchModel();
+                    match.TeamOne = matchreader["TeamOne"].ToString();
+                    match.TeamTwo = matchreader["TeamTwo"].ToString();
+                    match.MatchDate = Convert.ToDateTime(matchreader["fldMatchDate"]);
+                    matches.Add(match);
+                }
+
+                tournamentmatch.Matches = matches;
+                matchreader.Close();
+
+                tournamentmatches.Add(tournamentmatch);
+            }
+
+            oCon.Close();
+
+            return tournamentmatches;
+        }
+
         public dynamic GetUserMatchList(UserLoginModel user, int tournamentID)
         {
             oMySQLData.MySqlConnection oCon = new oMySQLData.MySqlConnection("Server=localhost;Database=betting;Uid=root;Pwd=Mysqlm@rch101984;");
@@ -104,7 +212,7 @@ namespace DataRepository
 
             string fetchQuery = "SELECT * FROM view_matchlistdetails WHERE TournamentID = " + tournamentID;
 
-            List<TeamModel> teams = new List<TeamModel>();
+            List<MatchBetModel> teams = new List<MatchBetModel>();
 
             oMySQLData.MySqlCommand cmd = new oMySQLData.MySqlCommand(fetchQuery, oCon);
             cmd.ExecuteNonQuery();
@@ -113,18 +221,33 @@ namespace DataRepository
 
             while (reader.Read())
             {
-                TeamModel team = new TeamModel();
+                MatchBetModel team = new MatchBetModel();
                 team.MatchID = Convert.ToInt32(reader["fldMatchID"]);
                 team.MatchDate = Convert.ToDateTime(reader["fldMatchDate"]);
                 team.TeamOne = reader["TeamOne"].ToString();
                 team.TeamTwo = reader["TeamTwo"].ToString();
                 team.TeamOneID = Convert.ToInt32(reader["TeamOneID"]);
                 team.TeamTwoID = Convert.ToInt32(reader["TeamTwoID"]);
+
+                ///add teamone, two user bet
                 team.BettorID = user.UserID;
 
                 teams.Add(team);
             }
+
             oCon.Close();
+
+            List<UserBetModel> usersbet = GetUserBetList(user.UserID, tournamentID);
+
+            if (usersbet.Count > 0)
+            {
+                foreach (MatchBetModel item in teams)
+                {
+                    item.TeamOneBet = usersbet.Where(t => t.MatchID == item.MatchID && t.TeamID == item.TeamOneID).Select(t => t.PlaceBet).FirstOrDefault();
+                    item.TeamTwoBet = usersbet.Where(t => t.MatchID == item.MatchID && t.TeamID == item.TeamTwoID).Select(t => t.PlaceBet).FirstOrDefault();
+                }
+            }
+
             return teams;
         }
 
@@ -193,7 +316,7 @@ namespace DataRepository
             oMySQLData.MySqlParameter userID = new oMySQLData.MySqlParameter("userID", register.UserID);
             oMySQLData.MySqlParameter tournamentID = new oMySQLData.MySqlParameter("tournamentID", register.TournamentID);
             oMySQLData.MySqlParameter betPoints = new oMySQLData.MySqlParameter("betPoints", register.TournamentPoints);
-     
+
             cmd.Parameters.Add(userID);
             cmd.Parameters.Add(tournamentID);
             cmd.Parameters.Add(betPoints);
@@ -203,6 +326,57 @@ namespace DataRepository
             oCon.Close();
 
             return result;
+        }
+
+        List<UserBetModel> GetUserBetList(int userID, int tournamentID)
+        {
+            oMySQLData.MySqlConnection oCon = new oMySQLData.MySqlConnection("Server=localhost;Database=betting;Uid=root;Pwd=Mysqlm@rch101984;");
+            oCon.Open();
+
+            string fetchQuery = "SELECT * FROM view_userbetdetails WHERE fldBettorID = " + userID + " AND fldTournamentID = " + tournamentID;
+
+            List<UserBetModel> bets = new List<UserBetModel>();
+
+            oMySQLData.MySqlCommand cmd = new oMySQLData.MySqlCommand(fetchQuery, oCon);
+            cmd.ExecuteNonQuery();
+
+            oMySQLData.MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                UserBetModel bet = new UserBetModel();
+                bet.BettorID = Convert.ToInt32(reader["fldBettorID"]);
+                bet.TournamentID = Convert.ToInt32(reader["fldTournamentID"]);
+                bet.MatchID = Convert.ToInt32(reader["fldMatchID"]);
+                bet.TeamID = Convert.ToInt32(reader["fldTeamBetID"]);
+                bet.PlaceBet = Convert.ToInt32(reader["fldPlaceBetPoints"]);
+
+                bets.Add(bet);
+            }
+            oCon.Close();
+
+            return bets;
+        }
+
+        int IsRegisterEmailAddExists(string emailID)
+        {
+            oMySQLData.MySqlConnection oCon = new oMySQLData.MySqlConnection("Server=localhost;Database=betting;Uid=root;Pwd=Mysqlm@rch101984;");
+            oCon.Open();
+
+            string fetchQuery = "SELECT * FROM tbluserlist WHERE fldUserEmail = " + "'" + emailID + "'";
+
+            oMySQLData.MySqlCommand cmd = new oMySQLData.MySqlCommand(fetchQuery, oCon);
+            int result = 0;
+
+            result =  Convert.ToInt32(cmd.ExecuteScalar());
+            return result;
+        }
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
     }

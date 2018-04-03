@@ -28,6 +28,7 @@ C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\API.dll.config
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\API.dll
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\API.pdb
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\Antlr3.Runtime.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\DataModel.dll
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\DataRepository.dll
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\Microsoft.Web.Infrastructure.dll
@@ -46,7 +47,7 @@ C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\System.Web.WebPage
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\System.Web.WebPages.Razor.dll
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\WebGrease.dll
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\MySql.Data.dll
-C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\DataModel.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\DataModel.pdb
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\DataRepository.pdb
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\DataRepository.dll.config
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\Antlr3.Runtime.pdb
@@ -64,7 +65,8 @@ C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\System.Web.WebPage
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\Newtonsoft.Json.xml
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\System.Web.Http.WebHost.xml
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\MySql.Data.xml
-C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\DataModel.pdb
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\obj\Debug\API.csprojResolveAssemblyReference.cache
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\obj\Debug\API.dll
 C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\obj\Debug\API.pdb
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\Common.dll
+C:\Users\mark.j.s.panopio\VS projects\WebApplication1\API\bin\Common.pdb

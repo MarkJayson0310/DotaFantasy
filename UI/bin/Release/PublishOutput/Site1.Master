@@ -1,0 +1,30 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="UI.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <script type="text/javascript" src="Scripts/js/knockout-3.4.2.js"></script>
+    <script type="text/javascript" src="Scripts/js/knockout-mapping.js"></script>
+    <script type="text/javascript" src="Scripts/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="Scripts/js/global.js"></script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div style="max-width: 30%; margin: auto">
+            <a href="matchlist.aspx">Match list</a>
+            <a href="login.aspx">Log in</a>
+            <a href="AddUser.aspx">Add User</a>
+            
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
