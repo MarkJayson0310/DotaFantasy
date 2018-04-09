@@ -11,7 +11,7 @@ namespace UI
 {
 
 
-    public partial class Betting
+    public partial class main
     {
     }
 }

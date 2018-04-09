@@ -29,47 +29,4 @@
     </div>
 
     <script type="text/javascript" src="Scripts/js/login.js"></script>
-
-    <%--<script type="text/javascript">
-        //function LoginUserInput() {
-
-        //    var self = this;
-
-        //    self.viewModel = {
-        //        EmailAddress: ko.observable("")
-        //        , Password: ko.observable("")
-        //    };
-        //    self.LoginUser = function (body) {
-        //        $.ajax({
-        //            url: apiDomain + 'api/user/login',
-        //            type: 'post',
-        //            data: self.viewModel,
-        //            success: function (data) {
-
-        //                if (data.IsUserExist) {
-
-        //                    localStorage["currentEmail"] = data.EmailAddress;
-        //                    localStorage["currentUserID"] = data.UserID;
-
-        //                    globalCurrentEmail(data.EmailAddress);
-        //                    globalCurrentUserID(data.UserID);
-
-        //                    console.log(currentUser);
-
-        //                    if (data.IsVerified == 1) {
-        //                        window.location.href = "Betting.aspx";
-        //                    }
-        //                    else {
-        //                        window.location.href = "activateuser.aspx";
-        //                    }
-        //                }
-        //                else {
-        //                    alert('Email account not registered!');
-        //                }
-        //            }
-        //        });
-        //    }
-        //}
-        //ko.applyBindings(new LoginUserInput());
-    </script>--%>
 </asp:Content>
